@@ -1,0 +1,66 @@
+paths:
+  data_dir: FightIQ/data
+  golden_dataset: FightIQ/data/UFC_full_data_golden.csv
+  silver_dataset: FightIQ/data/UFC_full_data_silver.csv
+  upcoming_fights: FightIQ/data/upcoming_fights.csv
+  upcoming_features: fightiq_codex/data/upcoming_features.parquet
+  raw_dir: data/raw
+  artifacts_dir: fightiq_codex/artifacts
+  outputs_dir: fightiq_codex/outputs
+
+splits:
+  val_start_date: '2023-01-01'
+  test_start_date: '2025-01-01'
+
+features:
+  exclude_odds: false
+  create_missing_indicators: true
+
+model:
+  candidates: [logistic_regression, xgboost, lightgbm]
+  ensemble:
+    enabled: false
+    n_splits: 5
+  calibration:
+    enabled: true
+    method: platt   # platt | isotonic
+
+training:
+  random_state: 42
+  sample_size: null   # e.g., 2000 for quick runs; null for full
+
+betting:
+  bankroll: 1000.0
+  kelly_fraction_cap: 0.05   # cap bet fraction to 5% of bankroll
+  min_edge: 0.02             # only bet when edge >= 2%
+  kelly_multiplier: 1.0      # partial Kelly multiplier (e.g., 0.5)
+  remove_vig: true           # normalize implied probs to remove bookmaker margin
+  odds_fields:               # choose which odds columns to use
+    f1: f_1_odds
+    f2: f_2_odds
+  tuning:                    # grid for fold-level tuning on calibration set
+    min_edge_grid: [0.0, 0.02, 0.04, 0.06]
+    kelly_cap_grid: [0.02, 0.05, 0.10]
+    kelly_multiplier_grid: [0.25, 0.5, 1.0]
+    prob_threshold_grid: [0.0, 0.55, 0.6]   # min prob for chosen side
+    objective: roi          # roi | sharpe
+  constraints:
+    max_bets_per_event: 999  # set small number to limit per card
+    max_exposure_per_event: 0.2  # fraction of bankroll per event (soft cap)
+
+modeling:
+  tuned_lgb_params_path: fightiq_codex/artifacts/20251021_130742_lgb_enhanced_tuned/best_params.json
+  calibrator: platt  # platt | isotonic
+  tuned_xgb_params_path: fightiq_codex/artifacts/20251021_141524_xgb_enhanced_tuned/best_params.json
+  auto_use_latest_zero_importance: true
+
+logging:
+  level: INFO
+
+ingestion:
+  sink: parquet        # parquet | bigquery
+  parquet_dir: data/raw
+  user_agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36
+  timeouts:
+    connect: 10
+    read: 20
