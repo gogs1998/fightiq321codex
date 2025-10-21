@@ -9,7 +9,6 @@ __pycache__/
 venv/
 .DS_Store
 Thumbs.db
-artifacts/
 outputs/
 FightIQ/
 UFC-Master-Pipeline/
@@ -17,5 +16,3 @@ ufc-fight-forecast/
 Promptforge/
 .claude/
 fightiq_codex/outputs/
-
-fightiq_codex/artifacts/

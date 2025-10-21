@@ -1,0 +1,14 @@
+{
+  "objective": "binary",
+  "metric": "binary_logloss",
+  "learning_rate": 0.03,
+  "num_leaves": 67,
+  "max_depth": 4,
+  "feature_fraction": 0.6797446008575154,
+  "bagging_fraction": 0.6952845466458056,
+  "bagging_freq": 6,
+  "min_data_in_leaf": 50,
+  "lambda_l1": 2.256505991359604,
+  "lambda_l2": 1.1394407245840277,
+  "verbose": -1
+}

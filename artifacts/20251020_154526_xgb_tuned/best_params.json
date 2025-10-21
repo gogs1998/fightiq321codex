@@ -1,0 +1,12 @@
+{
+  "objective": "binary:logistic",
+  "eval_metric": "logloss",
+  "max_depth": 5,
+  "learning_rate": 0.03,
+  "subsample": 0.7663754361047505,
+  "colsample_bytree": 0.6191451768312526,
+  "reg_alpha": 1.6552623439851641,
+  "reg_lambda": 1.2633287982441297,
+  "tree_method": "hist",
+  "random_state": 42
+}

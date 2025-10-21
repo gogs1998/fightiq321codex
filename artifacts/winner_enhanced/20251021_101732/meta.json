@@ -1,0 +1,9 @@
+{
+  "timestamp": "20251021_101732",
+  "train_rows": 6813,
+  "val_rows": 1016,
+  "test_rows": 400,
+  "lightgbm_best_iteration": 38,
+  "xgboost_best_iteration": 31,
+  "summary_csv": "D:\\Codex\\fightiq_codex\\outputs\\winner_enhanced_summary.csv"
+}

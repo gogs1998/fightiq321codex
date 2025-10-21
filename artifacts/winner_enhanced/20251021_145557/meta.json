@@ -1,0 +1,16 @@
+{
+  "timestamp": "20251021_145557",
+  "train_rows": 6813,
+  "val_rows": 1016,
+  "test_rows": 400,
+  "lightgbm_best_iteration": 381,
+  "xgboost_best_iteration": 921,
+  "summary_csv": "D:\\Codex\\fightiq_codex\\outputs\\winner_enhanced_summary.csv",
+  "guard_model": "stack_ensemble",
+  "guard_metrics": {
+    "val_accuracy": 0.7362204724409449,
+    "test_accuracy": 0.6375,
+    "min_val_acc": 0.71,
+    "min_test_acc": 0.62
+  }
+}
